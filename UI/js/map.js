@@ -5,9 +5,48 @@ import View from 'ol/View';
 import {OSM, Vector as VectorSource} from 'ol/source';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';*/
 
+var baseMap;
+var poly;
+var base;
+var user_key;
+var userID;
+var productSelected;
+var center; 
+var plink;
+var dateSelected;
+var availUDates = new Array();
+var availHDates = new Array();
+var j;
+var jsonDate;
+var dataLink;
+var flag;
+var tableFlag = 0;
+var statLink;
+var api_url;
+var selectedDate;
+var chartH = new Array();
+var chartU = new Array();
+var mean = new Array();
+var surl = new Array();
+var links = new Array();
+var sample;
+var tflag = 0;
+var lflag = 0;
+var legendIcon = 0;
+var productList;
+var farm_name;
+var selected;
+/*
 var raster = new ol.layer.Tile({
   source: new ol.source.OSM(),
-});
+});*/
+
+var raster = new ol.layer.Tile({
+    source: new ol.source.XYZ({
+      url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFsYWppMjI3IiwiYSI6ImNrbm10Z2h6NjB2eXQybnBlaTZ3cGgxMzMifQ.KSd7ydAqcZCAEzgoB6iLzA',
+      tileSize: 512
+    })
+  });
 
 var source = new ol.source.Vector({wrapX: false});
 
@@ -68,7 +107,7 @@ function drawFarm() {
 
   });
   draw.on('drawend', function(event) {
-    var intersect;
+    var intersect = false;
     var feature = event.feature;
     if (sketch.getGeometry().getType() == "Polygon") {
         console.log("Hi, from inside");
@@ -104,8 +143,8 @@ function drawFarm() {
 
                 const { value: formValues } = await Swal.fire({
                     title: 'Enter your farm name',
-                    html: '<input id="drawFarmName" class="swal2-input">' + '<h3>Crop Type</h3><input id="CropType" class="swal2-input" placeholder="Crop Type">' +
-                        ' <br> <label class="chk">Rice<input type="checkbox" value="Rice" name="check" checked="checked"><span class="checkmark"></span></label><label class="chk">Soil Moisture<input type="checkbox" value="Soil Moisture" name="check"><span class="checkmark"></span></label><br><label class="chk">Weather Forecast<input type="checkbox" value="Weather Forecast" name="check"><span class="checkmark"></span></label><br><label class="chk">Precipitation<input type="checkbox" value="Precipitation" name="check"><span class="checkmark"></span></label><br><label class="chk">Soil Temperature<input type="checkbox" value="Soil Temperature" name="check"><span class="checkmark"></span></label>',
+                    html: '<input id="drawFarmName" class="swal2-input">' + '<h3>Crop Type</h3>' +
+                        ' <br> <input type="radio" id="rice" name="crop" value="rice"> <label for="rice">Rice</label><br> <input type="radio" id="wheat" name="crop" value="wheat"> <label for="wheat">Wheat</label><br> <input type="radio" id="other" name="crop" value="other"><label for="other">Other</label>',
                     focusConfirm: false,
                     allowOutsideClick: false,
                     showCancelButton: true,
@@ -122,32 +161,29 @@ function drawFarm() {
             })()
             .then((value) => {
 
-                var i = 0;
-                $.each($("input[name='check']:checked"), function() {
-                    productList[i] = ($(this).val());
-                    i++;
-                });
-                product = productList.toString();
+                selected = $('input[name="crop"]:checked').val();
+                console.log(selected);
+                //product = productList.toString();
                 farm_name = document.getElementById('drawFarmName').value,
-                    console.log('satyukt_Format=' + product);
+                //console.log('products=' + product);
 
-                console.log('satyukt_Format=' + satyukt_format);
-                var jsonobj = JSON.parse(satyukt_format);
+                console.log('proper_format=' + proper_format);
+                var jsonobj = JSON.parse(proper_format);
                 //console.log(jsonobj); 
                 jsonobj.name = farm_name;
-                satyukt_format = JSON.stringify(jsonobj);
-                console.log(satyukt_format); // do all your logic here 
+                proper_format = JSON.stringify(jsonobj);
+                console.log(proper_format); // do all your logic here 
                 console.log(farm_name);
-
+                proper_format.cropname = selected
 
 
 
                 insertValues();
-                console.log("coord1234: " + poly);
+                console.log("coord1234: " + proper_format);
                 // do all your logic here
                 console.log("in swal " + farm_name);
 
-                console.log("in swal " + productList);
+                console.log("in swal " + selected);
             });
         }
     } else {
@@ -162,6 +198,75 @@ function drawFarm() {
 });
   }
   addInteraction();
+  const format = new ol.format.GeoJSON({ featureProjection: 'EPSG:3857' });
+  const download = document.getElementById('download');
+  source.on('change', function() {
+      const features = source.getFeatures();
+      const json = format.writeFeatures(features);
+      json_data = json;
+      console.log(typeof(json));
+      console.log(json_data);
+      var json_obj = JSON.parse(json_data);
+      console.log(json_obj.features[0].geometry.coordinates[0]);
+      var dummy_obj = {
+          type: "FeatureCollection",
+          name: "dummy",
+          geo_json: {
+              type: "name",
+              properties: {
+                  name: "urn:ogc:def:crs:OGC:1.3:CRS84"
+              },
+              geometry: {
+                  type: "Polygon",
+                  coordinates: [
+                      [
+
+                      ]
+                  ]
+              }
+          },
+          cropname:"dummyval"
+      }
+      console.log(dummy_obj.geo_json.geometry.coordinates[0]);
+      dummy_obj.geo_json.geometry.coordinates[0] = json_obj.features[0].geometry.coordinates[0];
+      proper_format = JSON.stringify(dummy_obj);
+      console.log(proper_format);
+
+      //download.href = 'data:text/json;charset=utf-8,' + json;
+  });
+}
+
+function insertValues() {
+    console.log("func : " + farm_name);
+    console.log("func : " + selected);
+    console.log("function : " + proper_format);
+
+    js_ob = JSON.parse(proper_format)
+    console.log(js_ob.cropname)
+    js_ob.cropname = selected
+    //console.log(proper_format)
+
+
+    console.log('http://127.0.0.1:5010/postjson?key=0')
+    var jsonstr = JSON.stringify(js_ob)
+    console.log(typeof(jsonstr))
+    //console.log(jsonstr);
+    $.ajax({
+        url : 'http://127.0.0.1:5010/postjson?key=0',
+        type : 'POST',
+        cors : true,
+        headers: {
+        'Access-Control-Allow-Origin': '*',
+        },
+        contentType: 'application/json',
+        data : jsonstr,
+        success : function(data)
+        {
+            console.log(data);
+        }
+     });
+
+
 }
 
 drawFarm();
