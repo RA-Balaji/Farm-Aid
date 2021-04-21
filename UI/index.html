@@ -192,16 +192,25 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <li class="nav-item has-treeview">
+                <a href="myfarms.html" class="nav-link"  id="myfarms">
+                  <i class="nav-icon fa fa-eye"></i>
+                  <p>
+                    My Farms
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-leaf nav-icon"></i>
+                      <p>Ex: Farm 1</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
           <li class="nav-item has-treeview">
-            <a class="nav-link" href="portfolio.html" id="portfolio">
-              <i class="nav-icon fas fa-seedling"></i>
-              <p>
-                My Farms
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="index.html" class="nav-link active">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Draw Farm
@@ -235,12 +244,12 @@
 </div>
 <!-- ./wrapper -->
 <script>
-  document.getElementById("portfolio").onclick = function () {
-    location.href = "portfolio.html";
+  document.getElementById("myfarms").onclick = function () {
+    location.href = "myfarms.html";
 };
 </script>
 
-<script src="js/map.js"></script>
+
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -252,5 +261,6 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>

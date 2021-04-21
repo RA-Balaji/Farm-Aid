@@ -3,7 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio</title>
+  <title>Draw Farm</title>
+
+  <!--Openlayers, Turf and leaflet-->
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v4.6.5/build/ol.js"></script>
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+  integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+  crossorigin=""></script>
+
+  <!--SweetAlert-->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.css">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -13,6 +31,20 @@
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <style>
+    .myButton {
+
+      padding: 30px;
+      display:block;
+      background-color: green;
+      color: white;
+      text-align:center;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <!-- Site wrapper -->
@@ -139,8 +171,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="./dist/img/fy.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Frontyard</span>
+      <img src="./logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Farm Aid</span>
     </a>
 
     <!-- Sidebar -->
@@ -160,66 +192,30 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <li class="nav-item has-treeview">
+                <a href="myfarms.html" class="nav-link active" id="info">
+                  <i class="nav-icon fa fa-eye"></i>
+                  <p>
+                    My Farms
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-leaf nav-icon"></i>
+                      <p>Ex: Farm 1</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fa fa-briefcase"></i>
+            <a href="index.html" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                Portfolio
+                Draw Farm
               </p>
             </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="index.html" class="nav-link" id="info">
-              <i class="nav-icon fa fa-eye"></i>
-              <p>
-                Info
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="index.html" class="nav-link" id="requests">
-              <i class="nav-icon fa fa-user-plus"></i>
-              <p>
-                Requests
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="index.html#pending" class="nav-link">
-                  <i class="nav-icon fas fa-exclamation-triangle"></i>
-                  <p>Pending</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="index.html#rejected" class="nav-link">
-                  <i class="nav-icon fa fa-ban"></i>
-                  <p>Rejected</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
@@ -229,117 +225,10 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 id="pending">Portfolio</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">Dashboard</li>
-              <li class="breadcrumb-item active">Portfolio</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
+  <div class="content-wrapper" id="map">
     <section class="content">
 
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                    <h3 class="card-title">Present</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>College</th>
-                            <th>No. of Students</th>
-                            <th>Start</th>
-                            <th>End</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>{{College}}</td>
-                            <td>
-                                {{Number}}
-                            </td>
-                            <td>{{End Date}}</td>
-                            <td>{{End Date}}</td>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>{{College}}</td>
-                            <td>
-                                {{Number}}
-                            </td>
-                            <td>{{End Date}}</td>
-                            <td>{{End Date}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                    <h3 class="card-title">Past</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>College</th>
-                                <th>No. of Students</th>
-                                <th>Start</th>
-                                <th>End</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>{{College}}</td>
-                                <td>
-                                    {{Number}}
-                                </td>
-                                <td>{{End Date}}</td>
-                                <td>{{End Date}}</td>
-                            </tr>
-                            <tr>
-                                <td>1.</td>
-                                <td>{{College}}</td>
-                                <td>
-                                    {{Number}}
-                                </td>
-                                <td>{{End Date}}</td>
-                                <td>{{End Date}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            </div>
-        </div>
+      <div class="container-fluid" >
       </div>
     </section>
     <!-- /.content -->
@@ -355,10 +244,12 @@
 </div>
 <!-- ./wrapper -->
 <script>
-    document.getElementById("requests").onclick = function () {
-      location.href = "index.html";
-  };
+  document.getElementById("portfolio").onclick = function () {
+    location.href = "portfolio.html";
+};
 </script>
+
+
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -370,5 +261,6 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>

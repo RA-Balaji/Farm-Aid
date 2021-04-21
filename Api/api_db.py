@@ -45,9 +45,9 @@ def fetch_farms(key):
         det['farmid'] = i[0]
         det['farmname'] = i[1]
         farm_li.append(det)
-    print(farm_li)
+    #print(farm_li)
 
-    #return farm_li
+    return farm_li
 
 """
 content = {
@@ -60,4 +60,4 @@ content = {
 }
 """
 #print(add_farm(content, 0000))
-fetch_farms(0)
+#fetch_farms(0)
