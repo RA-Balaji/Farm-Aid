@@ -265,8 +265,32 @@ function insertValues() {
             console.log(data);
         }
      });
+}
+
+function fetchfarms() {
+    console.log("func key: " + farm_name);
+    var key = 0
+
+    console.log('http://127.0.0.1:5010/userfarms?key=0')
+    //var jsonstr = JSON.stringify(js_ob)
+    //console.log(typeof(jsonstr))
+    //console.log(jsonstr);
+    $.ajax({
+        url : 'http://127.0.0.1:5010/userfarms?key=' + toString(key),
+        type : 'POST',
+        cors : true,
+        headers: {
+        'Access-Control-Allow-Origin': '*',
+        },
+        contentType: 'application/json',
+        success : function(data)
+        {
+            console.log(data);
+        }
+     });
 
 
 }
 
 drawFarm();
+fetchfarms();
