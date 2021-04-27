@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Farms</title>
+  <title>Add New Task</title>
 
   <!--Openlayers, Turf and leaflet-->
   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v4.6.5/build/ol.js"></script>
@@ -43,47 +43,6 @@
       top: 10px;
       right: 10px;
 
-      }
-      .ol-popup {
-        position: absolute;
-        background-color: white;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 280px;
-      }
-      .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-      }
-      .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-      }
-      .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-      }
-      .ol-popup-closer:after {
-        content: "✖";
       }
   </style>
 </head>
@@ -178,33 +137,31 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown" id="weather_disp">
+      <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="nav-icon fas fa-cloud-sun-rain"></i>
-          <span class="badge badge-warning navbar-badge">7</span>
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
         </a>
-        <!--<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">7 Days Weather Forecast</span>
-          <div class="dropdown-divider"></div>
-          <span class="dropdown-item dropdown-header"><strong> 23/04/2021</strong></span>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-thermometer-half mr-2"></i> Average Temperature
-            <span class="float-right text-muted text-sm">30 °C</span>
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-cloud-rain mr-2"></i> Overall Weather
-            <span class="float-right text-muted text-sm">Light Showers</span>
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-wind mr-2"></i> Wind Speed
-            <span class="float-right text-muted text-sm">10 knots</span>
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All</a>
-        </div>!-->
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
       </li>
     </ul>
   </nav>
@@ -233,22 +190,22 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item has-treeview" id="user_farms">
-                <a href="myfarms.html" class="nav-link active" id="info">
+               <li class="nav-item has-treeview">
+                <a href="myfarms.html" class="nav-link"  id="myfarms">
                   <i class="nav-icon fa fa-eye"></i>
                   <p>
                     My Farms
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <!--<ul class="nav nav-treeview">
+                <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="fas fa-leaf nav-icon"></i>
                       <p>Ex: Farm 1</p>
                     </a>
                   </li>
-                </ul>!--->
+                </ul>
               </li>
           <li class="nav-item has-treeview">
             <a href="index.html" class="nav-link" id="firstpage">
@@ -259,7 +216,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="schedule.html" class="nav-link" id="schedule">
+            <a href="schedule.html" class="nav-link active" id="schedule">
               <i class="nav-icon fa fa-calendar"></i>
               <p>
                 Schedule
@@ -283,13 +240,69 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" id="map">
-    <section class="content">
-      <div class="container-fluid" >
-        <div id="popup" class="ol-popup">
-          <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-          <div id="popup-content"></div>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 id="pending">New Task</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">Schedule</li>
+              <li class="breadcrumb-item active">New Task</li>
+            </ol>
+          </div>
         </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Fill Below Form</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Title</label>
+                      <input type="text" class="form-control" id="titleinp" placeholder="Enter Task Title">
+                    </div>
+                    <div class="form-group">
+                      <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                      <div class="col-12">
+                        <input class="form-control" type="date" id="dateinp">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Select Priority</label>
+                      <select class="form-control select2"  id="priorityinp">
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Write Description</label>
+                      <textarea class="form-control" rows="3" placeholder="Enter ..." id="descinp"></textarea>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+  
+                  <div class="card-footer">
+                    <button type="button" class="btn btn-primary" id="submitbtn" onclick="call_add()">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
+        </div>
+      </div>
+
+      <div class="container-fluid" >
       </div>
     </section>
     <!-- /.content -->
@@ -303,10 +316,20 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->  
+<!-- ./wrapper -->
+<script>
 
+  document.getElementById("myfarms").onclick = function () {
+    location.href = "myfarms.html";
+  };
+  document.getElementById("schedule").onclick = function () {
+      location.href = "schedule.html";
+  };
+  document.getElementById("firstpage").onclick = function () {
+      location.href = "index.html";
+  };
 
-
+</script>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -317,16 +340,65 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="js/myfarm.js"></script>
+<!--<script src="js/map.js"></script>!-->
 <script src="js/cookie.js"></script>
+<!--<script src="js/task.js"></script>>!-->
 
-</body>
 <script>
-  document.getElementById("firstpage").onclick = function () {
-    location.href = "index.html";
-};
-document.getElementById("schedule").onclick = function () {
-    location.href = "schedule.html";
-};
+  //set username in the sidebar
+  window.onload = function() {
+      var user_name = getCookie('username');
+      console.log(user_name);
+      var tag = "<a href='#' class='d-block'>"+user_name+"</a>"
+      $("#username").html(tag);
+
+      
+
+      //fetchfarms(getCookie('user_key'));
+      //drawFarm(getCookie('user_key'));
+    };
+    function call_add(){
+    
+    farmid = getCookie("farm_id");
+    console.log(farmid);
+    var userid = 202;
+    console.log("Here")
+    var title=$("#titleinp").val();
+    var date=$("#dateinp").val();
+    var priority=$("#priorityinp").val();
+    var description=$("#descinp").val();
+    
+    console.log('http://127.0.0.1:5010/newtask')
+    var jsonstr = "{\"seton\":" + "\"" + date + "\"" + "," + "\"about\":" +  "\"" + description +  "\"" + "," + "\"priority\":" +  "\""+ priority +  "\"" + "," + "\"title\":" + "\"" + title +  "\"" +"}"
+    console.log(jsonstr);
+    $.ajax({
+        url : 'http://127.0.0.1:5010/newtask?farmid=' + farmid + '&userid=' + userid,
+        type : 'POST',
+        cors : true,
+        headers: {
+        'Access-Control-Allow-Origin': '*',
+        },
+        contentType: 'application/json',
+        data : jsonstr,
+        success : function(data)
+        {
+            console.log(data.result);
+        }
+     });
+
+    }
+    function myfarms_id(id) {
+
+            console.log($(id).attr('id'));
+            var id_with_name = $(id).attr('id');
+            str_arr = id_with_name.split("/");
+            var farmid = str_arr[0]
+            var set_farmname = str_arr[1]
+            setCookie('farm_id', farmid, 1);
+            setCookie('farm_name', set_farmname, 1);
+            //window.location.href = 'myfarms.html'
+        }
+
 </script>
+</body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Draw Farm</title>
+  <title>Schedule</title>
 
   <!--Openlayers, Turf and leaflet-->
   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v4.6.5/build/ol.js"></script>
@@ -208,7 +208,7 @@
                 </ul>
               </li>
           <li class="nav-item has-treeview">
-            <a href="index.html" class="nav-link active" id="firstpage">
+            <a href="index.html" class="nav-link" id="firstpage">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Draw Farm
@@ -216,7 +216,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="schedule.html" class="nav-link" id="schedule">
+            <a href="schedule.html" class="nav-link active">
               <i class="nav-icon fa fa-calendar"></i>
               <p>
                 Schedule
@@ -240,8 +240,207 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" id="map">
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 id="pending">Pending Tasks</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">Schedule</li>
+              <li class="breadcrumb-item active">Pending</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
     <section class="content">
+      <div class="row">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Title</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <small class="badge badge-warning"><i class="far fa-clock"></i> Date</small>
+
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
+
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fas fa-leaf"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Farm Name</span>
+                        <span class="info-box-number">{{ item.Reason }}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-warning"><i class="fas fa-bell"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Set  On</span>
+                        <span class="info-box-number">{{item.email}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-success"><i class="fas fa-edit"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Description</span>
+                        <span class="info-box-number">{{item.Count}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-danger"><i class="fas fa-tasks"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Priority</span>
+                        <span class="info-box-number">{{item.phone}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                    <form method ="post" action="status">
+                      <button type="submit" class="btn btn-success" name="accept" value={{ item.College_name }}> Done </button>
+                      <button type="submit" class="btn btn-danger" name="reject" value={{ item.College_name }}> Delete </button>
+                    </form>
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+            <!-- /.card -->
+
+        </div>
+      </div><br>
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 id="pending">Noted Tasks</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">Schedule</li>
+                <li class="breadcrumb-item active">Pending</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+      <div class="row">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Title</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <small class="badge badge-warning"><i class="far fa-clock"></i> Date</small>
+
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
+
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fas fa-leaf"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Farm Name</span>
+                        <span class="info-box-number">{{ item.Reason }}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-warning"><i class="fas fa-bell"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Set  On</span>
+                        <span class="info-box-number">{{item.email}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-success"><i class="fas fa-edit"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Description</span>
+                        <span class="info-box-number">{{item.Count}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-danger"><i class="fas fa-tasks"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Priority</span>
+                        <span class="info-box-number">{{item.phone}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                    <form method ="post" action="status">
+                      <button type="submit" class="btn btn-success" name="accept" value={{ item.College_name }}> Done </button>
+                      <button type="submit" class="btn btn-danger" name="reject" value={{ item.College_name }}> Delete </button>
+                    </form>
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+            <!-- /.card -->
+
+        </div>
+      </div>
 
       <div class="container-fluid" >
       </div>
@@ -259,12 +458,16 @@
 </div>
 <!-- ./wrapper -->
 <script>
-    document.getElementById("myfarms").onclick = function () {
-      location.href = "myfarms.html";
+  document.getElementById("myfarms").onclick = function () {
+    location.href = "myfarms.html";
   };
   document.getElementById("schedule").onclick = function () {
       location.href = "schedule.html";
   };
+  document.getElementById("firstpage").onclick = function () {
+      location.href = "index.html";
+  };
+
 </script>
 
 
@@ -279,19 +482,36 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="js/map.js"></script>
+<!--<script src="js/map.js"></script>!-->
 <script src="js/cookie.js"></script>
 
 <script>
   //set username in the sidebar
   window.onload = function() {
       var user_name = getCookie('username');
+      var user_id = 202;
       console.log(user_name);
       var tag = "<a href='#' class='d-block'>"+user_name+"</a>"
       $("#username").html(tag);
 
+    $.ajax({
+      url : 'http://127.0.0.1:5010/fetchtasks?userid=' + user_id,
+      type : 'POST',
+      cors : true,
+      headers: {
+      'Access-Control-Allow-Origin': '*',
+      },
+      contentType: 'application/json',
+      success : function(data)
+      {
+          console.log(data.pending);
+      }
+    });
+
+
       //fetchfarms(getCookie('user_key'));
-      drawFarm(getCookie('user_key'));
+      //drawFarm(getCookie('user_key'));
+
     };
 
     function myfarms_id(id) {

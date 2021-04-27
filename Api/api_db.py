@@ -18,7 +18,7 @@ def add_farm(content, key, cropname, name):
 
     rowid = cursor.lastrowid
     cursor.execute('select * from polygonStore')    
-    user_det = cursor.fetchall()
+    #user_det = cursor.fetchall()
 
     print(rowid)
     db.close()
@@ -49,6 +49,87 @@ def fetch_farms(key):
 
     return farm_li
 
+def single_farm(farmid):
+    
+    db = pymysql.connect( 
+    host='localhost', 
+    user='root',  
+    password = "1234", 
+    db='web_services', 
+    ) 
+    print("database connected")
+    cursor = db.cursor()
+
+    get_user_det = "SELECT polyinfo FROM polygonStore WHERE id = %s"
+    cursor.execute(get_user_det, (farmid))
+    user_farm = cursor.fetchall()
+    return user_farm[0][0]
+
+
+def fetch_details(farmid):
+
+    db = pymysql.connect( 
+    host='localhost', 
+    user='root',  
+    password = "1234", 
+    db='web_services', 
+    )
+    cursor = db.cursor()
+
+    get_farm_det = "SELECT farm_name, crop FROM polygonStore WHERE id = %s"
+    cursor.execute(get_farm_det, (farmid))
+    user_farm = cursor.fetchall()
+    return list(user_farm[0])
+
+def enter_task(userid, farmid, title, seton, about, priority):
+
+    db = pymysql.connect( 
+    host='localhost', 
+    user='root',  
+    password = "1234", 
+    db='web_services', 
+    )
+    cursor = db.cursor()
+
+    qry = "INSERT INTO tasksSchedule (user_id, farmid, title, seton, about, priority) VALUES (%s, %s, %s, %s, %s, %s);"
+    cursor.execute(qry, (userid, farmid, title, seton, about, priority))
+    db.commit()
+
+def get_task(userid):
+
+    db = pymysql.connect( 
+    host='localhost', 
+    user='root',  
+    password = "1234", 
+    db='web_services', 
+    )
+    cursor = db.cursor()
+
+    qry = "SELECT title, seton, about, task_id priority FROM tasksSchedule WHERE user_id = %s"
+    cursor.execute(qry, (userid))   
+    tasks = cursor.fetchall()
+    li = []
+    for i in tasks:
+        li.append(list(i))
+    #print(li)
+    return li
+
+def delete_task(taskid):
+    
+    db = pymysql.connect( 
+    host='localhost', 
+    user='root',  
+    password = "1234", 
+    db='web_services', 
+    )
+    cursor = db.cursor()
+
+    qry = "DELETE FROM tasksSchedule where task_id = %s"
+    cursor.execute(qry, (taskid))   
+    tasks = cursor.fetchall()
+
+    db.commit()
+
 """
 content = {
 "type": "FeatureCollection",
@@ -61,3 +142,5 @@ content = {
 """
 #print(add_farm(content, 0000))
 #fetch_farms(0)
+#single_farm(15)
+print(get_task(202))

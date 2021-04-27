@@ -64,7 +64,7 @@ var map = new ol.Map({
 });
 
 //var typeSelect = document.getElementById('type');
-function drawFarm() {
+function drawFarm(key) {
 
   console.log('Hello');
 
@@ -178,7 +178,7 @@ function drawFarm() {
 
 
 
-                insertValues();
+                insertValues(key);
                 console.log("coord1234: " + proper_format);
                 // do all your logic here
                 console.log("in swal " + farm_name);
@@ -236,7 +236,7 @@ function drawFarm() {
   });
 }
 
-function insertValues() {
+function insertValues(key) {
     console.log("func : " + farm_name);
     console.log("func : " + selected);
     console.log("function : " + proper_format);
@@ -247,12 +247,12 @@ function insertValues() {
     //console.log(proper_format)
 
 
-    console.log('http://127.0.0.1:5010/postjson?key=0')
+    console.log('http://127.0.0.1:5010/postjson?key='+key)
     var jsonstr = JSON.stringify(js_ob)
     console.log(typeof(jsonstr))
     //console.log(jsonstr);
     $.ajax({
-        url : 'http://127.0.0.1:5010/postjson?key=0',
+        url : 'http://127.0.0.1:5010/postjson?key='+key,
         type : 'POST',
         cors : true,
         headers: {
@@ -267,16 +267,17 @@ function insertValues() {
      });
 }
 
-function fetchfarms() {
+function fetchfarms(key) {
     console.log("func key: " + farm_name);
-    var key = 0
+    //var key = getCookie('user_key');
+    console.log(key);
 
-    console.log('http://127.0.0.1:5010/userfarms?key=0')
+    console.log('http://127.0.0.1:5010/userfarms?key=' + key)
     //var jsonstr = JSON.stringify(js_ob)
     //console.log(typeof(jsonstr))
     //console.log(jsonstr);
     $.ajax({
-        url : 'http://127.0.0.1:5010/userfarms?key=' + toString(key),
+        url : 'http://127.0.0.1:5010/userfarms?key=' + key,
         type : 'POST',
         cors : true,
         headers: {
@@ -292,5 +293,4 @@ function fetchfarms() {
 
 }
 
-drawFarm();
-fetchfarms();
+//drawFarm();
