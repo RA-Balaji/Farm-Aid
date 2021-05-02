@@ -3,7 +3,7 @@ from flask import request, jsonify
 from flask_cors import CORS, cross_origin
 from api_db import add_farm, fetch_farms, single_farm, fetch_details, enter_task, get_task, delete_task
 from authentication_api import new_user,verify_otp,login
-from farm_entry import new_entry,previous_entry
+from farm_entry import new_entry,previous_entry, widget_info
 import json
 import requests
 import datetime 
@@ -134,9 +134,9 @@ def fetch_tasks():
     for i in tasks:
         date_time_obj = datetime.datetime.strptime(i[1], '%Y-%m-%d').date()
         if date_time_obj < date_today:
-            pending.append({"title":i[0], "seton":i[1], "desc":i[2], "tid":i[3]})
+            pending.append({"title":i[0], "seton":i[1], "desc":i[2], "tid":i[3], "name":fetch_details(i[4])[0], "farmid":i[4], "priority":i[5]})
         else:
-            rem.append({"title":i[0], "seton":i[1], "desc":i[2], "tid":i[3]})
+            rem.append({"title":i[0], "seton":i[1], "desc":i[2], "tid":i[3], "name":fetch_details(i[4])[0], "farmid":i[4], "priority":i[5]})
     
     return jsonify({"pending":pending, "remaining":rem})
 
@@ -182,6 +182,12 @@ def post_entry():
 def previous_entries():
     data = request.get_json()
     return previous_entry(data)
+
+@app.route("/widgets", methods=["POST", "GET"])
+@cross_origin(origin="*", headers=["Content-Type", "Authorization"])
+def widgets():
+    data = request.get_json()
+    return widget_info(data)
 
 
 app.run(host='127.0.0.1', port = 5010)

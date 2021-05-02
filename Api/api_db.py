@@ -105,7 +105,7 @@ def get_task(userid):
     )
     cursor = db.cursor()
 
-    qry = "SELECT title, seton, about, task_id priority FROM tasksSchedule WHERE user_id = %s"
+    qry = "SELECT title, seton, about, task_id, farmid, priority FROM tasksSchedule WHERE user_id = %s"
     cursor.execute(qry, (userid))   
     tasks = cursor.fetchall()
     li = []

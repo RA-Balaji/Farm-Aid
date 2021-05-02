@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Schedule</title>
+  <title>About</title>
 
   <!--Openlayers, Turf and leaflet-->
   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v4.6.5/build/ol.js"></script>
@@ -44,6 +44,14 @@
       right: 10px;
 
       }
+      .responsive {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
   </style>
   <script>
     function logout() {
@@ -64,10 +72,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="about.html" class="nav-link">About</a>
+        <a href="#" class="nav-link">About</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="about.html#contact" class="nav-link">Contact</a>
+        <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
 
@@ -134,7 +142,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="schedule.html" class="nav-link active" id="schedule">
+            <a href="schedule.html" class="nav-link" id="schedule">
               <i class="nav-icon fa fa-calendar"></i>
               <p>
                 Schedule
@@ -149,51 +157,103 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 id="pending">Pending Tasks</h1>
+            <h1>Farm Aid</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">Schedule</li>
-              <li class="breadcrumb-item active">Pending</li>
+              <li class="breadcrumb-item"><a href="#">About</a></li>
+              <li class="breadcrumb-item ">Farm Aid</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    <section class="content" id="task_pend"> 
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="container-fluid">
+        <div class="row" id="about">
+          <img src="./dist/img/farming.png" height="auto" max-width="50%" class="responsive">
+        </div><br>
+        <div class="row">
+            <div class="col-12">
+              <!-- Default box -->
+              <div class="card" id="api">
+                <div class="card-header">
+                  <h3 class="card-title">About</h3>
+  
+                  <div class="card-tools">
+                  </div>
+                </div>
+                <div class="card-body">
+                    <p>Farm Aid is a Web Application developed to assist farmers in managing their farms. A Farm can be drawn using the Draw Farm feature, 
+                        name the drawn farm and select the crop. Logs can be made for the farm, tasks can be scheduled. A 7 day weather forecast is also
+                        available to be prepared in case of unforseen shortcomings.
+                    </p>
+                    <p>All you have to do is register using your mobile number and verify the OTP, using which you can log in and start drawing 
+                        farms.
+                    </p>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+      </div>
     </section>
-      <section class="content-header">
+    <!-- /.content -->
+    <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 id="pending">Noted Tasks</h1>
+              <h1>Contact Us</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">Schedule</li>
-                <li class="breadcrumb-item active">Pending</li>
+                <li class="breadcrumb-item"><a href="#">Contact Us</a></li>
+                <li class="breadcrumb-item ">Farm Aid</li>
               </ol>
             </div>
           </div>
         </div><!-- /.container-fluid -->
       </section>
-    <section class="content" id="task_rem"> 
-    </section>
-        </div>
-      </div>
+      <div class="container-fluid">
+        <div class="row" id="contact">
+            <div class="col-md-6">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-address-card"></i></span>
 
-      <div class="container-fluid" >
-      </div>
-    </section>
-    <!-- /.content -->
+                <div class="info-box-content">
+                <span class="info-box-text">Balaji</span>
+                <span class="info-box-number">balajiramakrishnan07@gmail.com</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            </div>
+            <div class="col-md-6">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-address-card"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">Rithish</span>
+                <span class="info-box-number">rithishramachandran09@gmail.com</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            </div>
+        </div>
+    </div>
   </div>
-  <!-- /.content-wrapper -->
 
 
   <!-- Control Sidebar -->
@@ -257,7 +317,7 @@
 
       var ht_text, ht_text2;
       var user_name = getCookie('username');
-      var user_id = getCookie('user_key');
+      var user_id = 202;
       console.log(user_name);
       var tag = "<a href='#' class='d-block'>"+user_name+"</a>"
       $("#username").html(tag);

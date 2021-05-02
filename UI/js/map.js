@@ -53,14 +53,15 @@ var source = new ol.source.Vector({wrapX: false});
 var vector = new ol.layer.Vector({
   source: source,
 });
-
+var view_var = new ol.View({
+    zoom: 5,
+    minZoom: 3,
+    center: ol.proj.fromLonLat([80.9038, 22.4937]),
+});
 var map = new ol.Map({
   layers: [raster, vector],
   target: 'map',
-  view: new ol.View({
-    center: [-11000000, 4600000],
-    zoom: 4,
-  }),
+  view: view_var,
 });
 
 //var typeSelect = document.getElementById('type');
@@ -265,6 +266,7 @@ function insertValues(key) {
             console.log(data);
         }
      });
+     window.location.href="myfarms.html";
 }
 
 function fetchfarms(key) {

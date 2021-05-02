@@ -1,4 +1,4 @@
-
+var farm_name;
 var raster = new ol.layer.Tile({
     source: new ol.source.XYZ({
       url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFsYWppMjI3IiwiYSI6ImNrbm10Z2h6NjB2eXQybnBlaTZ3cGgxMzMifQ.KSd7ydAqcZCAEzgoB6iLzA',
@@ -110,6 +110,7 @@ function gen_overlay(farmid){
     contentType: 'application/json',
     success : function(data)
     {
+        setCookie('farm_name', data.farmname);
         console.log(data.farmname);
         fname = data.farmname;
         cname = data.crop;
@@ -147,28 +148,42 @@ function gen_overlay(farmid){
     
   });
 }
-function fetch_weather(farmid){
+function fetch_weather(fid) {
   var weather_nav;
 
   $.ajax({
-    url : 'http://127.0.0.1:5010/weather?farmid=' + farmid,
-    type : 'POST',
-    cors : true,
-    headers: {
-    'Access-Control-Allow-Origin': '*',
-    },
-    contentType: 'application/json',
-    success : function(data)
-    {
-        console.log(data.result_weather);
-        weather_nav = '<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"><span class="dropdown-item dropdown-header">7 Days Weather Forecast</span><div class="dropdown-divider"/><span class="dropdown-item dropdown-header"><strong>'+ data.result_weather[0].date +'</strong></span><div class="dropdown-divider"/><a href="#" class="dropdown-item"><i class="fas fa-thermometer-half mr-2"/> Average Temperature <span class="float-right text-muted text-sm">'+  data.result_weather[0].day+'°C</span> </a><div class="dropdown-divider"/><a href="#" class="dropdown-item"><i class="fas fa-cloud-rain mr-2"/> Overall Weather <span class="float-right text-muted text-sm"> '+ data.result_weather[0].desc +'</span> </a><div class="dropdown-divider"/><a href="#" class="dropdown-item"><i class="fas fa-wind mr-2"/> Wind Speed <span class="float-right text-muted text-sm">10 knots</span> </a><div class="dropdown-divider"/><a href="#" class="dropdown-item dropdown-footer">See All</a></div> '
-        console.log(weather_nav)
-        $('#weather_disp').append(weather_nav);
-        //console.log(document.getElementById("#weather_disp").innerHTML);
-    }
- });
-
-
+      url: 'http://127.0.0.1:5010/weather?farmid=' + fid,
+      type: 'POST',
+      cors: true,
+      headers: {
+          'Access-Control-Allow-Origin': '*',
+      },
+      contentType: 'application/json',
+      success: function(data) {
+          console.log(data.result_weather);
+          weather_array = data.result_weather
+          var weather_nav = ""
+          for (i = 0; i < weather_array.length; i++) {
+              var in_celsius = parseFloat(weather_array[i]["day"]) - 273.0
+              var weather_desc = String(weather_array[i]["desc"]);
+              if (weather_desc.includes("cloud")) {
+                  icon_string = "<i class='fas fa-cloud  fa-2x' style='color:#9ba3a3'></i>"
+              } else if (weather_desc.includes("rain")) {
+                  icon_string = "<i class='fas fa-cloud-showers-heavy fa-2x' style='color:#54c9d1'></i>"
+              } else if (weather_desc.includes("sky")) {
+                  icon_string = "<i class='fas fa-cloud-sun  fa-2x' style='color:#fed426'></i>"
+              }
+              else if (weather_desc.includes("snow")) {
+                icon_string = "<i class='fas fa-snowflake  fa-2x' style='color:#54c9d1'></i>"
+            }
+              weather_nav += "<a href='#' class='dropdown-item'> <div class='media'><div class='img-size-50  mr-3'>" + icon_string + "</div><div class='media-body'> <h3 class='dropdown-item-title'> " + weather_array[i]["date"] + "<span class='float-right text-sm '>" + String(in_celsius.toFixed(2)) + " &nbsp;<i class='fas fa-temperature-low'></i></span> </h3> <p class='text-sm'>" + weather_array[i]["desc"] + "</p> </div> </div> </a> <div class='dropdown-divider'></div>"
+          }
+          // <img src='./dist/img/weather.png' alt='User Avatar' class='img-size-50  mr-3'>
+          // weather_nav = "<a href='#' class='dropdown-item'> <div class='media'> <img src='./dist/img/user.png' alt='User Avatar' class='img-size-50  mr-3'> <div class='media-body'> <h3 class='dropdown-item-title'> 28/01/2021 <span class='float-right text-sm '>23 &nbsp;<i class='fas fa-temperature-low'></i></span> </h3> <p class='text-sm'>Cloudy Dark</p> </div> </div> </a> <div class='dropdown-divider'></div>"
+          console.log(weather_nav)
+          $('#weather_forecast').html(weather_nav);
+      }
+  });
 }
 
 function fetchcoords(fid) {
@@ -190,6 +205,8 @@ function fetchcoords(fid) {
         contentType: 'application/json',
         success : function(data)
         {
+            farm_name = data.name;
+            console.log(farm_name);
             console.log(data);
             crd = data;
             //console.log(typeof(crd))

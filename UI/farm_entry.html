@@ -40,6 +40,13 @@
             right: 10px;
         }
     </style>
+    <script>
+    function logout() {
+            eraseCookie("user_name");
+            eraseCookie("user_key");
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -60,105 +67,15 @@
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-                    </div>
-                </div>
-            </form>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <div onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="./dist/img/user.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="./dist/img/user.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="./dist/img/user.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
+                  </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -204,7 +121,7 @@
                 </ul>
               </li>
           <li class="nav-item has-treeview">
-            <a href="index.html" class="nav-link active" id="firstpage">
+            <a href="index.html" class="nav-link" id="firstpage">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Draw Farm
@@ -216,17 +133,8 @@
               <i class="nav-icon fa fa-calendar"></i>
               <p>
                 Schedule
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="addtask.html" class="nav-link">
-                  <i class="fa fa-plus nav-icon"></i>
-                  <p>Add Task</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
@@ -236,7 +144,7 @@
   </aside>
 
 
-        <!-- Content Wrapper. Contains page content -->
+        <!-- Content Wrapper. Contains page content --><br>
         <div class="content-wrapper" >
             <section class="content">
                 <div class="container-fluid">
@@ -353,6 +261,66 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box" style="height: 90px;">
+                                    <span class="info-box-icon bg-info"><i class="far fa-list-alt"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Entries</span>
+                                        <span class="info-box-number" id="widget_entries">1,410</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box" style="height: 90px;">
+                                    <span class="info-box-icon bg-success"><i class="fas fa-water"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Irrigation</span>
+                                        <span class="info-box-number" id="widget_irrigation">410</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box" style="height: 90px;">
+                                    <span class="info-box-icon bg-warning"><i class="fas fa-poop"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Fertilizer</span>
+                                        <span class="info-box-number" id="widget_fertilizer">13,648</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="info-box" style="height: 90px;">
+                                    <span class="info-box-icon bg-danger"><i class="fas fa-spray-can"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Pesticide</span>
+                                        <span class="info-box-number" id="widget_pesticide">93,139</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Previous entries</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -461,6 +429,39 @@
                                     }
                                 }
                             });
+                            $.ajax({
+                                url: 'http://127.0.0.1:5010/widgets',
+                                type: 'POST',
+                                cors: true,
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                },
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    "user_key": user_key,
+                                    "farm_id": farm_id,
+                                }),
+                                success: function(output) {
+                                    console.log(output);
+                                    if (output["status"] == "success") {
+                                        var wid_info = "<p>" + output["no_of_entries"] + "</p>"
+                                        $("#widget_entries").html(wid_info);
+                                        wid_info = "<p>" + output["irrigation"] + "</p>"
+                                        $("#widget_irrigation").html(wid_info);
+                                        wid_info = "<p>" + output["fertilizer"] + "</p>"
+                                        $("#widget_fertilizer").html(wid_info);
+                                        wid_info = "<p>" + output["pesticide"] + "</p>"
+                                        $("#widget_pesticide").html(wid_info);
+                                    } else {
+                                        var wid_info = "<p>" + output["no_of_entries"] + "</p>"
+                                        $("#widget_entries").html(wid_info);
+                                        wid_info = "<p> no records found</p>"
+                                        $("#widget_irrigation").html(wid_info);
+                                        $("#widget_fertilizer").html(wid_info);
+                                        $("#widget_pesticide").html(wid_info);
+                                    }
+                                }
+                            });
                         };
 
 
@@ -479,14 +480,15 @@
                             var year = date.getFullYear();
                             date_string = [year, month, day].join('-');
                             var comments = $("#entry_comments").val();
-                            // var irrigation = $("#irrigation").val();
-                            var irrigation = $("#irrigation").attr('checked') ? true : false;
+                            var irrigation = $("#irrigation").is(":checked") ? true : false;
 
                             // var fertilizer = $("#fertilizer").val();
-                            var fertilizer = $("#fertilizer").attr('checked') ? true : false;
+                            // console.log($("#fertilizer:checked")[0]["checked"])
+                            var fertilizer = $("#fertilizer").is(":checked") ? true : false;
 
                             // var pesticide = $("#pesticide").val();
-                            var pesticide = $("#pesticide").attr('checked') ? true : false;
+                            var pesticide = $("#pesticide").is(":checked") ? true : false;
+                            console.log(pesticide);
                             var date = $("#entry_comments").val();
                             var farm_id = getCookie('farm_id');
                             var user_key = getCookie('user_key');
